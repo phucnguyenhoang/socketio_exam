@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <script src='http://localhost:8080/socket.io/socket.io.js'></script>
+        <script src='js/jquery.js'></script>
+        <script>
+			$(document).ready(function(){
+				var socket = io.connect('http://127.0.0.1:8080');
+				socket.on('greeting', function(data){
+					  alert(data);
+				});
+				socket.on('new-user', function(data){
+					alert(data + ' Have joined!');
+				});
+				$('#go').click(function(){
+					  socket.emit('user-join',$('#name').val());
+				});
+			});
+		</script>
+    </head>
+	<body>
+		<div>
+            <p>Hello world! You're:</p>
+            <input type='text' id='name' value='Anynomous'/>
+            <button id='go'>Go</button>
+        </div>
+	</body>
+</html>
